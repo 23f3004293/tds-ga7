@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quarterly Earnings – Interactive RevealJS Deck</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="https://unpkg.com/highlight.js@11/styles/github-dark.min.css" />
+
+    <style>
+      .brand-pill { background:#111; border:1px solid #333; border-radius:999px; padding:0.35rem 0.9rem; font-size:0.7em; letter-spacing:.3px; }
+      .kpi { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1rem; margin-top:1rem; }
+      .kpi > div { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:1rem; }
+      .kpi h3 { margin:0 0 .4rem 0; font-size:1.1em; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h2>Quarterly Earnings Report</h2>
+          <p class="brand-pill">Presented by: Technical Consultant</p>
+          <p><small>Email: 23f3004293@ds.study.iitm.ac.in</small></p>
+          <p><small>Contact Link: <a href="mailto:23f3004293@ds.study.iitm.ac.in">23f3004293@ds.study.iitm.ac.in</a></small></p>
+          <aside class="notes">
+            Welcome stakeholders. This deck demonstrates our modern, interactive presentation capabilities using RevealJS. Use 
+            the arrow keys to navigate. Press "S" to open speaker view and see these notes.
+          </aside>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+### Highlights (Markdown slide)
+
+- **Revenue:** `₹ 1,250 Cr` (YoY **+14%**)
+- **Operating Margin:** `18.2%`
+- **EPS:** `₹ 9.42`
+- **Cash & Equivalents:** `₹ 3,100 Cr`
+
+> This slide is authored in **Markdown** to enable fast edits and versioning in Git.
+
+Notes:
+- Use fragments on the next slide to reveal KPIs progressively.
+          </textarea>
+          <aside class="notes">This entire slide is parsed from Markdown. Encourage teams to submit PRs for edits.</aside>
+        </section>
+
+        <section>
+          <h3>KPIs (Progressive Reveal)</h3>
+          <div class="kpi">
+            <div class="fragment" data-fragment-index="1">
+              <h3>Net Revenue</h3>
+              <p><strong>₹ 1,250 Cr</strong><br/><small>YoY +14%</small></p>
+            </div>
+            <div class="fragment" data-fragment-index="2">
+              <h3>Operating Margin</h3>
+              <p><strong>18.2%</strong><br/><small>+120 bps YoY</small></p>
+            </div>
+            <div class="fragment" data-fragment-index="3">
+              <h3>Free Cash Flow</h3>
+              <p><strong>₹ 420 Cr</strong><br/><small>Conversion 92%</small></p>
+            </div>
+          </div>
+          <aside class="notes">Advance one click per KPI. Pause to discuss drivers and risks.</aside>
+        </section>
+
+        <section>
+          <h3>Code Sample: Pulling Metrics</h3>
+          <pre><code class="language-python"># Sample: compute YoY growth
+from dataclasses import dataclass
+
+@dataclass
+class Metric:
+    current: float
+    prior: float
+
+    def yoy(self) -> float:
+        return (self.current / self.prior - 1.0) * 100
+
+rev = Metric(current=1250.0, prior=1096.0)
+print(f"Revenue YoY: {rev.yoy():.2f}%")
+</code></pre>
+          <aside class="notes">This demonstrates syntax-highlighted code. You can live-demo via the project README or a Jupyter notebook link.</aside>
+        </section>
+
+        <section>
+          <h3>Financial Formulas (MathJax)</h3>
+          <p>Weighted Average Cost of Capital (WACC):</p>
+          <p>\[ \text{WACC} = \frac{E}{V} r_e + \frac{D}{V} r_d (1 - T) \]</p>
+          <p>Discounted Cash Flow (perpetuity with growth):</p>
+          <p>\[ \text{Value} = \frac{\text{FCF}_1}{r - g} \]</p>
+          <p>Earnings Per Share (EPS): \( \displaystyle EPS = \frac{\text{Net Income}}{\text{Weighted Avg. Shares}} \)</p>
+          <aside class="notes">Explain each variable: E (equity), D (debt), V (E+D), r_e, r_d, tax T, growth g.</aside>
+        </section>
+
+        <section>
+          <h2>Thank You</h2>
+          <p>Questions? Reach me at 23f3004293@ds.study.iitm.ac.in</p>
+          <p>Contact Link: <a href="mailto:23f3004293@ds.study.iitm.ac.in">23f3004293@ds.study.iitm.ac.in</a></p>
+          <p class="fragment">Press <kbd>Esc</kbd> for slide overview.</p>
+          <aside class="notes">Wrap up and move to Q&A. Remind audience about the Appendix in the repo.</aside>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/markdown/markdown.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/math/math.js"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        transition: 'fade',
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ],
+        mathjax3: {
+          tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] }
+        }
+      });
+    </script>
+  </body>
+</html>
